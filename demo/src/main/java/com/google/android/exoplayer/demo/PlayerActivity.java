@@ -27,6 +27,7 @@ import com.google.android.exoplayer.demo.player.UnsupportedDrmException;
 import com.google.android.exoplayer.metadata.TxxxMetadata;
 import com.google.android.exoplayer.text.CaptionStyleCompat;
 import com.google.android.exoplayer.text.SubtitleView;
+import com.google.android.exoplayer.util.ManifestFetcher;
 import com.google.android.exoplayer.util.Util;
 import com.google.android.exoplayer.util.VerboseLogUtil;
 
@@ -37,6 +38,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -56,6 +58,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -103,8 +106,8 @@ public class PlayerActivity extends Activity implements SurfaceHolder.Callback, 
     super.onCreate(savedInstanceState);
 
     Intent intent = getIntent();
-    contentUri = intent.getData();
-    contentType = intent.getIntExtra(CONTENT_TYPE_EXTRA, DemoUtil.TYPE_OTHER);
+      contentUri = Uri.parse("file://" + Environment.getExternalStorageDirectory().getAbsolutePath() +
+              File.separator + "superprofs" + File.separator + "lectures" + File.separator + "1" + File.separator + ManifestFetcher.MANIFEST_ENCRYPTED);    contentType = intent.getIntExtra(CONTENT_TYPE_EXTRA, DemoUtil.TYPE_OTHER);
     contentId = intent.getStringExtra(CONTENT_ID_EXTRA);
 
     setContentView(R.layout.player_activity);
